@@ -1,35 +1,35 @@
 modLoader="javafml"
-loaderVersion="${loader_version_range}"
-license="${mod_license}"
+loaderVersion="[38,)"
+license="GNU General Public License v3.0"
 issueTrackerURL="https://github.com/CERBON-MODS/Just-Enough-Beacons/issues"
 
 [[mods]]
-modId="${mod_id}"
-version="${mod_version}"
-displayName="${mod_name}"
+modId="just_enough_beacons"
+version="1.0.0"
+displayName="JustEnoughBeacons"
 displayURL="https://www.curseforge.com/minecraft/mc-mods/just-enough-beacons-1-18"
 logoFile="logo.png"
 credits="This mod was originally created by tfarecnim, however he stopped updating the mod since 1.16.5. Therefore I decided to bring it to the newest versions of Minecraft."
-authors="${mod_authors}"
-description='''${mod_description}'''
+authors="CerbonXD"
+description='''JEI addon to display useful information about beacons.'''
 
-[[dependencies.${mod_id}]]
+[[dependencies.just_enough_beacons]]
     modId="forge"
     mandatory=true
-    versionRange="${forge_version_range}"
+    versionRange="[38,)"
     ordering="NONE"
     side="CLIENT"
 
-[[dependencies.${mod_id}]]
+[[dependencies.just_enough_beacons]]
     modId="minecraft"
     mandatory=true
-    versionRange="${minecraft_version_range}"
+    versionRange="[1.18,1.19)"
     ordering="NONE"
     side="CLIENT"
 
-[[dependencies.${mod_id}]]
+[[dependencies.just_enough_beacons]]
     modId="jei"
     mandatory=true
-    versionRange="${jei_version_range}"
+    versionRange="[10,)"
     ordering="NONE"
     side="CLIENT"

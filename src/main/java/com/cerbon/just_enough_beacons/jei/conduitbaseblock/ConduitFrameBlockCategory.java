@@ -11,6 +11,8 @@ import mezz.jei.api.recipe.RecipeIngredientRole;
 import mezz.jei.api.recipe.RecipeType;
 import mezz.jei.api.recipe.category.IRecipeCategory;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.TranslatableComponent;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Blocks;
 import org.jetbrains.annotations.NotNull;
@@ -23,13 +25,23 @@ public class ConduitFrameBlockCategory implements IRecipeCategory<ConduitFrameBl
     }
 
     @Override
+    public ResourceLocation getUid() {
+        return null;
+    }
+
+    @Override
+    public Class<? extends ConduitFrameBlockRecipe> getRecipeClass() {
+        return ConduitFrameBlockRecipe.class;
+    }
+
+    @Override
     public @NotNull RecipeType<ConduitFrameBlockRecipe> getRecipeType() {
         return JEBRecipeTypes.CONDUIT_FRAME_BLOCK;
     }
 
     @Override
     public @NotNull Component getTitle() {
-        return Component.translatable("category.conduit_frame_blocks");
+        return new TranslatableComponent("category.conduit_frame_blocks");
     }
 
     @Override

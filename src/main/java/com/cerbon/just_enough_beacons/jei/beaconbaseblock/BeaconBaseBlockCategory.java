@@ -1,5 +1,6 @@
 package com.cerbon.just_enough_beacons.jei.beaconbaseblock;
 
+import com.cerbon.just_enough_beacons.jei.conduitbaseblock.ConduitFrameBlockRecipe;
 import com.cerbon.just_enough_beacons.util.JEBConstants;
 import com.cerbon.just_enough_beacons.util.JEBRecipeTypes;
 import mezz.jei.api.constants.VanillaTypes;
@@ -11,6 +12,8 @@ import mezz.jei.api.recipe.RecipeIngredientRole;
 import mezz.jei.api.recipe.RecipeType;
 import mezz.jei.api.recipe.category.IRecipeCategory;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.TranslatableComponent;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Blocks;
 import org.jetbrains.annotations.NotNull;
@@ -24,13 +27,23 @@ public class BeaconBaseBlockCategory implements IRecipeCategory<BeaconBaseBlockR
     }
 
     @Override
+    public ResourceLocation getUid() {
+        return null;
+    }
+
+    @Override
+    public Class<? extends BeaconBaseBlockRecipe> getRecipeClass() {
+        return BeaconBaseBlockRecipe.class;
+    }
+
+    @Override
     public @NotNull RecipeType<BeaconBaseBlockRecipe> getRecipeType() {
         return JEBRecipeTypes.BEACON_BASE_BLOCK;
     }
 
     @Override
     public @NotNull Component getTitle() {
-        return Component.translatable("category.beacon_base_blocks");
+        return new TranslatableComponent("category.beacon_base_blocks");
     }
 
     @Override

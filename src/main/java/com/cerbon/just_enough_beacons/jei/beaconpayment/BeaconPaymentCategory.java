@@ -1,5 +1,6 @@
 package com.cerbon.just_enough_beacons.jei.beaconpayment;
 
+import com.cerbon.just_enough_beacons.jei.conduitbaseblock.ConduitFrameBlockRecipe;
 import com.cerbon.just_enough_beacons.util.JEBConstants;
 import com.cerbon.just_enough_beacons.util.JEBRecipeTypes;
 import mezz.jei.api.constants.VanillaTypes;
@@ -11,6 +12,8 @@ import mezz.jei.api.recipe.RecipeIngredientRole;
 import mezz.jei.api.recipe.RecipeType;
 import mezz.jei.api.recipe.category.IRecipeCategory;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.TranslatableComponent;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Blocks;
 import org.jetbrains.annotations.NotNull;
@@ -23,13 +26,23 @@ public class BeaconPaymentCategory implements IRecipeCategory<BeaconPaymentRecip
     }
 
     @Override
+    public ResourceLocation getUid() {
+        return null;
+    }
+
+    @Override
+    public Class<? extends BeaconPaymentRecipe> getRecipeClass() {
+        return BeaconPaymentRecipe.class;
+    }
+
+    @Override
     public @NotNull RecipeType<BeaconPaymentRecipe> getRecipeType() {
         return JEBRecipeTypes.BEACON_PAYMENT;
     }
 
     @Override
     public @NotNull Component getTitle() {
-        return Component.translatable("category.beacon_payments");
+        return new TranslatableComponent("category.beacon_payments");
     }
 
     @Override

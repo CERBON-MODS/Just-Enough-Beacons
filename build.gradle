@@ -12,7 +12,7 @@ version = mod_version
 group = mod_group_id
 
 base {
-    archivesName = mod_name + "-Forge-1.18.X"
+    archivesName = mod_name + "-Forge-1.18.2"
 }
 
 java.toolchain.languageVersion = JavaLanguageVersion.of(17)

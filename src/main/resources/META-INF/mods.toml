@@ -1,5 +1,5 @@
 modLoader="javafml"
-loaderVersion="[38,)"
+loaderVersion="[40,)"
 license="GNU General Public License v3.0"
 issueTrackerURL="https://github.com/CERBON-MODS/Just-Enough-Beacons/issues"
 
@@ -16,14 +16,14 @@ description='''JEI addon to display useful information about beacons.'''
 [[dependencies.just_enough_beacons]]
     modId="forge"
     mandatory=true
-    versionRange="[38,)"
+    versionRange="[40,)"
     ordering="NONE"
     side="CLIENT"
 
 [[dependencies.just_enough_beacons]]
     modId="minecraft"
     mandatory=true
-    versionRange="[1.18,1.19)"
+    versionRange="[1.18.2,1.19)"
     ordering="NONE"
     side="CLIENT"
 

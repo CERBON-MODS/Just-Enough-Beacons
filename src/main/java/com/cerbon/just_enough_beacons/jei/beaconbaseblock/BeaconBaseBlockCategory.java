@@ -1,6 +1,5 @@
 package com.cerbon.just_enough_beacons.jei.beaconbaseblock;
 
-import com.cerbon.just_enough_beacons.jei.conduitbaseblock.ConduitFrameBlockRecipe;
 import com.cerbon.just_enough_beacons.util.JEBConstants;
 import com.cerbon.just_enough_beacons.util.JEBRecipeTypes;
 import mezz.jei.api.constants.VanillaTypes;

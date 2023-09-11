@@ -1,0 +1,1 @@
+This mod was originally created by [tfarecnim](https://legacy.curseforge.com/members/tfarecnim/projects), however he stopped updating the mod since 1.16.5 as you can see [here](https://www.curseforge.com/minecraft/mc-mods/just-enough-beacons/files). Therefore I decided to bring it to the newest versions of Minecraft.

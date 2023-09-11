@@ -1,15 +1,15 @@
 modLoader="javafml"
 loaderVersion="${loader_version_range}"
 license="${mod_license}"
-#issueTrackerURL="https://change.me.to.your.issue.tracker.example.invalid/"
+issueTrackerURL="https://github.com/CERBON-MODS/Just-Enough-Beacons/issues"
 
 [[mods]]
 modId="${mod_id}"
 version="${mod_version}"
 displayName="${mod_name}"
-#displayURL="https://change.me.to.your.mods.homepage.example.invalid/"
-#logoFile="examplemod.png"
-#credits=""
+displayURL="https://www.curseforge.com/minecraft/mc-mods/just-enough-beacons-1-18"
+logoFile="logo.png"
+credits="This mod was originally created by tfarecnim, however he stopped updating the mod since 1.16.5. Therefore I decided to bring it to the newest versions of Minecraft."
 authors="${mod_authors}"
 description='''${mod_description}'''
 

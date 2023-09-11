@@ -42,21 +42,23 @@ public class JEBJeiPlugin implements IModPlugin {
     @Override
     public void registerRecipes(IRecipeRegistration registration) {
         BeaconBaseBlockRecipe.refresh();
-        int beaconBaseBlockPages = (int)Math.ceil(BeaconBaseBlockRecipe.cache.size()/28D);
-        List<BeaconBaseBlockRecipe> beaconBaseBlockRecipes = new ArrayList<>();
-        IntStream.range(0, beaconBaseBlockPages).forEach(i -> beaconBaseBlockRecipes.add(new BeaconBaseBlockRecipe(i)));
-        registration.addRecipes(JEBRecipeTypes.BEACON_BASE_BLOCK, beaconBaseBlockRecipes);
-
         BeaconPaymentRecipe.refresh();
-        int beaconPaymentPages = (int)Math.ceil(BeaconPaymentRecipe.cache.size()/28D);
-        List<BeaconPaymentRecipe> beaconPaymentRecipes = new ArrayList<>();
-        IntStream.range(0, beaconPaymentPages).forEach(i -> beaconPaymentRecipes.add(new BeaconPaymentRecipe(i)));
-        registration.addRecipes(JEBRecipeTypes.BEACON_PAYMENT, beaconPaymentRecipes);
-
         ConduitFrameBlockRecipe.refresh();
-        int conduitFrameBlockPages = (int)Math.ceil(ConduitFrameBlockRecipe.cache.size()/28D);
+
+        int beaconBaseBlockPages = (int) Math.ceil(BeaconBaseBlockRecipe.cache.size()/28D);
+        int beaconPaymentPages = (int) Math.ceil(BeaconPaymentRecipe.cache.size()/28D);
+        int conduitFrameBlockPages = (int) Math.ceil(ConduitFrameBlockRecipe.cache.size()/28D);
+
+        List<BeaconBaseBlockRecipe> beaconBaseBlockRecipes = new ArrayList<>();
+        List<BeaconPaymentRecipe> beaconPaymentRecipes = new ArrayList<>();
         List<ConduitFrameBlockRecipe> conduitFrameBlockRecipes = new ArrayList<>();
+
+        IntStream.range(0, beaconBaseBlockPages).forEach(i -> beaconBaseBlockRecipes.add(new BeaconBaseBlockRecipe(i)));
+        IntStream.range(0, beaconPaymentPages).forEach(i -> beaconPaymentRecipes.add(new BeaconPaymentRecipe(i)));
         IntStream.range(0, conduitFrameBlockPages).forEach(i -> conduitFrameBlockRecipes.add(new ConduitFrameBlockRecipe(i)));
+
+        registration.addRecipes(JEBRecipeTypes.BEACON_BASE_BLOCK, beaconBaseBlockRecipes);
+        registration.addRecipes(JEBRecipeTypes.BEACON_PAYMENT, beaconPaymentRecipes);
         registration.addRecipes(JEBRecipeTypes.CONDUIT_FRAME_BLOCK, conduitFrameBlockRecipes);
     }
 

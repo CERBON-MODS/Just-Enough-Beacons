@@ -2,6 +2,8 @@ package com.cerbon.just_enough_beacons.jei;
 
 import com.cerbon.just_enough_beacons.jei.beaconbaseblock.BeaconBaseBlockCategory;
 import com.cerbon.just_enough_beacons.jei.beaconbaseblock.BeaconBaseBlockRecipe;
+import com.cerbon.just_enough_beacons.jei.beaconpayment.BeaconPaymentCategory;
+import com.cerbon.just_enough_beacons.jei.beaconpayment.BeaconPaymentRecipe;
 import com.cerbon.just_enough_beacons.util.JEBConstants;
 import com.cerbon.just_enough_beacons.util.JEBRecipeTypes;
 import mezz.jei.api.IModPlugin;
@@ -32,7 +34,7 @@ public class JEBJeiPlugin implements IModPlugin {
         IJeiHelpers jeiHelpers = registration.getJeiHelpers();
         IGuiHelper guiHelper = jeiHelpers.getGuiHelper();
 
-        registration.addRecipeCategories(new BeaconBaseBlockCategory(guiHelper));
+        registration.addRecipeCategories(new BeaconBaseBlockCategory(guiHelper), new BeaconPaymentCategory(guiHelper));
     }
 
     @Override
@@ -42,10 +44,17 @@ public class JEBJeiPlugin implements IModPlugin {
         List<BeaconBaseBlockRecipe> beaconBaseBlockRecipes = new ArrayList<>();
         IntStream.range(0, beaconBaseBlockPages).forEach(i -> beaconBaseBlockRecipes.add(new BeaconBaseBlockRecipe(i)));
         registration.addRecipes(JEBRecipeTypes.BEACON_BASE_BLOCK, beaconBaseBlockRecipes);
+
+        BeaconPaymentRecipe.refresh();
+        int beaconPaymentPages = (int)Math.ceil(BeaconPaymentRecipe.cache.size()/28D);
+        List<BeaconPaymentRecipe> beaconPaymentRecipes = new ArrayList<>();
+        IntStream.range(0, beaconPaymentPages).forEach(i -> beaconPaymentRecipes.add(new BeaconPaymentRecipe(i)));
+        registration.addRecipes(JEBRecipeTypes.BEACON_PAYMENT, beaconPaymentRecipes);
     }
 
     @Override
     public void registerRecipeCatalysts(IRecipeCatalystRegistration registration) {
         registration.addRecipeCatalyst(new ItemStack(Blocks.BEACON), JEBRecipeTypes.BEACON_BASE_BLOCK);
+        registration.addRecipeCatalyst(new ItemStack(Blocks.BEACON), JEBRecipeTypes.BEACON_PAYMENT);
     }
 }

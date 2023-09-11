@@ -4,6 +4,8 @@ import com.cerbon.just_enough_beacons.jei.beaconbaseblock.BeaconBaseBlockCategor
 import com.cerbon.just_enough_beacons.jei.beaconbaseblock.BeaconBaseBlockRecipe;
 import com.cerbon.just_enough_beacons.jei.beaconpayment.BeaconPaymentCategory;
 import com.cerbon.just_enough_beacons.jei.beaconpayment.BeaconPaymentRecipe;
+import com.cerbon.just_enough_beacons.jei.conduitbaseblock.ConduitFrameBlockCategory;
+import com.cerbon.just_enough_beacons.jei.conduitbaseblock.ConduitFrameBlockRecipe;
 import com.cerbon.just_enough_beacons.util.JEBConstants;
 import com.cerbon.just_enough_beacons.util.JEBRecipeTypes;
 import mezz.jei.api.IModPlugin;
@@ -34,7 +36,7 @@ public class JEBJeiPlugin implements IModPlugin {
         IJeiHelpers jeiHelpers = registration.getJeiHelpers();
         IGuiHelper guiHelper = jeiHelpers.getGuiHelper();
 
-        registration.addRecipeCategories(new BeaconBaseBlockCategory(guiHelper), new BeaconPaymentCategory(guiHelper));
+        registration.addRecipeCategories(new BeaconBaseBlockCategory(guiHelper), new BeaconPaymentCategory(guiHelper), new ConduitFrameBlockCategory(guiHelper));
     }
 
     @Override
@@ -50,11 +52,18 @@ public class JEBJeiPlugin implements IModPlugin {
         List<BeaconPaymentRecipe> beaconPaymentRecipes = new ArrayList<>();
         IntStream.range(0, beaconPaymentPages).forEach(i -> beaconPaymentRecipes.add(new BeaconPaymentRecipe(i)));
         registration.addRecipes(JEBRecipeTypes.BEACON_PAYMENT, beaconPaymentRecipes);
+
+        ConduitFrameBlockRecipe.refresh();
+        int conduitFrameBlockPages = (int)Math.ceil(ConduitFrameBlockRecipe.cache.size()/28D);
+        List<ConduitFrameBlockRecipe> conduitFrameBlockRecipes = new ArrayList<>();
+        IntStream.range(0, conduitFrameBlockPages).forEach(i -> conduitFrameBlockRecipes.add(new ConduitFrameBlockRecipe(i)));
+        registration.addRecipes(JEBRecipeTypes.CONDUIT_FRAME_BLOCK, conduitFrameBlockRecipes);
     }
 
     @Override
     public void registerRecipeCatalysts(IRecipeCatalystRegistration registration) {
         registration.addRecipeCatalyst(new ItemStack(Blocks.BEACON), JEBRecipeTypes.BEACON_BASE_BLOCK);
         registration.addRecipeCatalyst(new ItemStack(Blocks.BEACON), JEBRecipeTypes.BEACON_PAYMENT);
+        registration.addRecipeCatalyst(new ItemStack(Blocks.CONDUIT), JEBRecipeTypes.CONDUIT_FRAME_BLOCK);
     }
 }

@@ -1,17 +1,23 @@
 package com.cerbon.just_enough_beacons.jei.beaconbaseblock;
 
+import com.cerbon.better_beacons.util.BBUtils;
+import com.cerbon.better_beacons.util.json.BeaconBaseBlocksAmplifierManager;
 import com.cerbon.just_enough_beacons.util.JEBConstants;
 import com.cerbon.just_enough_beacons.util.JEBRecipeTypes;
+import com.cerbon.just_enough_beacons.util.JEBUtils;
 import mezz.jei.api.constants.VanillaTypes;
 import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
+import mezz.jei.api.gui.builder.IRecipeSlotBuilder;
 import mezz.jei.api.gui.drawable.IDrawable;
 import mezz.jei.api.helpers.IGuiHelper;
 import mezz.jei.api.recipe.IFocusGroup;
 import mezz.jei.api.recipe.RecipeIngredientRole;
 import mezz.jei.api.recipe.RecipeType;
 import mezz.jei.api.recipe.category.IRecipeCategory;
+import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import org.jetbrains.annotations.NotNull;
 
@@ -53,7 +59,19 @@ public class BeaconBaseBlockCategory implements IRecipeCategory<BeaconBaseBlockR
             for (int x = 0; x < 7; x++) {
                 int index = 7 * y + x;
                 if (index >= count)break;
-                builder.addSlot(RecipeIngredientRole.CATALYST, xPos + 18 * x, yPos + 18 * y).addItemStack(recipe.getBeaconBaseBlocksSublist().get(index));
+
+                ItemStack itemStack = recipe.getBeaconBaseBlocksSublist().get(index);
+                IRecipeSlotBuilder slot =  builder.addSlot(RecipeIngredientRole.CATALYST, xPos + 18 * x, yPos + 18 * y).addItemStack(itemStack);
+
+                if (JEBUtils.isModLoaded(JEBConstants.BETTER_BEACONS)){
+                    if (!recipe.getBeaconBaseBlocksSublist().isEmpty()){
+                        String itemId = BBUtils.getItemKeyAsString(itemStack.getItem());
+                        Block block = JEBUtils.getBlockByKey(itemId);
+                        int amplifier = BeaconBaseBlocksAmplifierManager.getBlockAmplifierMap().getOrDefault(block, 0);
+
+                        slot.addTooltipCallback(((recipeSlotView, tooltip) -> tooltip.add(Component.translatable("jei.just_enough_beacons.base_blocks.tooltip", amplifier).withStyle(ChatFormatting.YELLOW))));
+                    }
+                }
             }
         }
 

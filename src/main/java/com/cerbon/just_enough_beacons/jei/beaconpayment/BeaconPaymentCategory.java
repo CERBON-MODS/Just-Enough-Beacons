@@ -1,15 +1,20 @@
 package com.cerbon.just_enough_beacons.jei.beaconpayment;
 
+import com.cerbon.better_beacons.util.BBUtils;
+import com.cerbon.better_beacons.util.json.BeaconPaymentItemsRangeManager;
 import com.cerbon.just_enough_beacons.util.JEBConstants;
 import com.cerbon.just_enough_beacons.util.JEBRecipeTypes;
+import com.cerbon.just_enough_beacons.util.JEBUtils;
 import mezz.jei.api.constants.VanillaTypes;
 import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
+import mezz.jei.api.gui.builder.IRecipeSlotBuilder;
 import mezz.jei.api.gui.drawable.IDrawable;
 import mezz.jei.api.helpers.IGuiHelper;
 import mezz.jei.api.recipe.IFocusGroup;
 import mezz.jei.api.recipe.RecipeIngredientRole;
 import mezz.jei.api.recipe.RecipeType;
 import mezz.jei.api.recipe.category.IRecipeCategory;
+import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Blocks;
@@ -52,7 +57,18 @@ public class BeaconPaymentCategory implements IRecipeCategory<BeaconPaymentRecip
             for (int x = 0; x < 7; x++) {
                 int index = 7 * y + x;
                 if (index >= count)break;
-                builder.addSlot(RecipeIngredientRole.CATALYST, xPos + 18 * x, yPos + 18 * y).addItemStack(recipe.getBeaconPaymentSublist().get(index));
+
+                ItemStack itemStack = recipe.getBeaconPaymentSublist().get(index);
+                IRecipeSlotBuilder slot = builder.addSlot(RecipeIngredientRole.CATALYST, xPos + 18 * x, yPos + 18 * y).addItemStack(itemStack);
+
+                if (JEBUtils.isModLoaded(JEBConstants.BETTER_BEACONS)){
+                    if (!recipe.getBeaconPaymentSublist().isEmpty()){
+                        int range = BeaconPaymentItemsRangeManager.getItemRangeMap().getOrDefault(BBUtils.getItemKeyAsString(itemStack.getItem()), 0);
+
+                        slot.addTooltipCallback(((recipeSlotView, tooltip) -> tooltip.add(Component.translatable("jei.just_enough_beacons.payment_item.tooltip", range).withStyle(ChatFormatting.YELLOW))));
+                    }
+                }
+
             }
         }
 

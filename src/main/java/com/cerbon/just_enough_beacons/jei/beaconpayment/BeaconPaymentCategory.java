@@ -1,5 +1,6 @@
 package com.cerbon.just_enough_beacons.jei.beaconpayment;
 
+import com.cerbon.better_beacons.config.BBCommonConfigs;
 import com.cerbon.better_beacons.util.BBUtils;
 import com.cerbon.better_beacons.util.json.BeaconPaymentItemsRangeManager;
 import com.cerbon.just_enough_beacons.util.JEBConstants;
@@ -62,7 +63,7 @@ public class BeaconPaymentCategory implements IRecipeCategory<BeaconPaymentRecip
                 IRecipeSlotBuilder slot = builder.addSlot(RecipeIngredientRole.CATALYST, xPos + 18 * x, yPos + 18 * y).addItemStack(itemStack);
 
                 if (JEBUtils.isModLoaded(JEBConstants.BETTER_BEACONS)){
-                    if (!recipe.getBeaconPaymentSublist().isEmpty()){
+                    if (!recipe.getBeaconPaymentSublist().isEmpty() && BBCommonConfigs.ENABLE_PAYMENT_ITEM_RANGE.get()){
                         int range = BeaconPaymentItemsRangeManager.getItemRangeMap().getOrDefault(BBUtils.getItemKeyAsString(itemStack.getItem()), 0);
 
                         slot.addTooltipCallback(((recipeSlotView, tooltip) -> tooltip.add(Component.translatable("jei.just_enough_beacons.payment_item.tooltip", range).withStyle(ChatFormatting.YELLOW))));

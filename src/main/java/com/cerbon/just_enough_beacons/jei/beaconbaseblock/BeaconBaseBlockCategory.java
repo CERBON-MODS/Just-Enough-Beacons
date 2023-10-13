@@ -1,5 +1,6 @@
 package com.cerbon.just_enough_beacons.jei.beaconbaseblock;
 
+import com.cerbon.better_beacons.config.BBCommonConfigs;
 import com.cerbon.better_beacons.util.BBUtils;
 import com.cerbon.better_beacons.util.json.BeaconBaseBlocksAmplifierManager;
 import com.cerbon.just_enough_beacons.util.JEBConstants;
@@ -64,7 +65,7 @@ public class BeaconBaseBlockCategory implements IRecipeCategory<BeaconBaseBlockR
                 IRecipeSlotBuilder slot =  builder.addSlot(RecipeIngredientRole.CATALYST, xPos + 18 * x, yPos + 18 * y).addItemStack(itemStack);
 
                 if (JEBUtils.isModLoaded(JEBConstants.BETTER_BEACONS)){
-                    if (!recipe.getBeaconBaseBlocksSublist().isEmpty()){
+                    if (!recipe.getBeaconBaseBlocksSublist().isEmpty() && BBCommonConfigs.ENABLE_BASE_BLOCK_AMPLIFIER.get()){
                         String itemId = BBUtils.getItemKeyAsString(itemStack.getItem());
                         Block block = JEBUtils.getBlockByKey(itemId);
                         int amplifier = BeaconBaseBlocksAmplifierManager.getBlockAmplifierMap().getOrDefault(block, 0);

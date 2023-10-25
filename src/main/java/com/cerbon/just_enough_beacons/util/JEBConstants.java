@@ -7,4 +7,5 @@ public class JEBConstants {
 
     public static final ResourceLocation BACKGROUND = new ResourceLocation(MOD_ID, "textures/gui/arrow.png");
 
+    public static final String DOUBLE_SLABS = "doubleslabs";
 }

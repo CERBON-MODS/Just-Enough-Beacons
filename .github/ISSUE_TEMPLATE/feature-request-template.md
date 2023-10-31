@@ -12,7 +12,7 @@ assignees: ''
 
 - [ ] **I have checked that the requested feature is not a duplicate or, if it is, it needs to be reopened**
 - [ ] **I have checked that I am running the latest version of Better Totem Of Undying Mod**
-- [ ] **I have read the [contributing guidelines](https://github.com/CerbonXD/BetterTotemOfUndying/blob/master/CONTRIBUTING.md#feature-requests) and I agree with the [Code of Conduct](https://github.com/CerbonXD/BetterTotemOfUndying/blob/master/CODE_OF_CONDUCT.md)**
+- [ ] **I have read the [contributing guidelines](https://github.com/CERBON-MODS/Just-Enough-Beacons/blob/master/CONTRIBUTING.md#feature-requests) and I agree with the [Code of Conduct](https://github.com/CERBON-MODS/Just-Enough-Beacons/blob/master/CODE_OF_CONDUCT.md)**
 
 ## Is your feature request related to a problem? Please describe.
 

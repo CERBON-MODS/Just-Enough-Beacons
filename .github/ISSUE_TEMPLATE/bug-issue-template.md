@@ -11,7 +11,7 @@ assignees: ''
 
 - [ ] **I have checked that the bug is not a duplicate or, if it is, it needs to be reopened**
 - [ ] **I have checked that I am running the latest version of Just Enough Beacons**
-- [ ] **I have read the [contributing guidelines](https://github.com/CerbonXD/BetterTotemOfUndying/blob/master/CONTRIBUTING.md#issues) and I agree with the [Code of Conduct](https://github.com/CerbonXD/BetterTotemOfUndying/blob/master/CODE_OF_CONDUCT.md)**
+- [ ] **I have read the [contributing guidelines](https://github.com/CERBON-MODS/Just-Enough-Beacons/blob/master/CONTRIBUTING.md#issues) and I agree with the [Code of Conduct](https://github.com/CERBON-MODS/Just-Enough-Beacons/blob/master/CODE_OF_CONDUCT.md)**
 
 ## Minecraft Version
 Version of Minecraft you are running the mod on

@@ -64,7 +64,7 @@ public class BeaconPaymentCategory implements IRecipeCategory<BeaconPaymentRecip
 
                 if (JEBUtils.isModLoaded(JEBConstants.BETTER_BEACONS)){
                     if (!recipe.getBeaconPaymentSublist().isEmpty() && BBCommonConfigs.ENABLE_PAYMENT_ITEM_RANGE.get()){
-                        int range = BeaconPaymentItemsRangeManager.getItemRangeMap().getOrDefault(BBUtils.getItemKeyAsString(itemStack.getItem()), 0);
+                        int range = BeaconPaymentItemsRangeManager.getItemRangeMap().getOrDefault(JEBUtils.getItemKeyAsString(itemStack.getItem()), 0);
 
                         slot.addTooltipCallback(((recipeSlotView, tooltip) -> tooltip.add(Component.translatable("jei.just_enough_beacons.payment_item.tooltip", range).withStyle(ChatFormatting.YELLOW))));
                     }

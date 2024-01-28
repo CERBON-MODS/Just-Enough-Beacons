@@ -1,161 +1,88 @@
-import net.darkhax.curseforgegradle.TaskPublishCurseForge
-
 plugins {
-    id 'eclipse'
-    id 'idea'
-    id 'maven-publish'
-    id 'net.minecraftforge.gradle' version '[6.0,6.2)'
-    id 'net.darkhax.curseforgegradle' version '1.1.15'
+    id "architectury-plugin" version "3.4-SNAPSHOT"
+    id "dev.architectury.loom" version "1.4-SNAPSHOT" apply false
 }
 
-version = mod_version
-group = mod_group_id
-
-base {
-    archivesName = mod_name + "-Forge-1.19+"
+architectury {
+    minecraft = minecraft_version
 }
 
-java.toolchain.languageVersion = JavaLanguageVersion.of(17)
+subprojects {
+    apply plugin: "dev.architectury.loom"
 
-println "Java: ${System.getProperty 'java.version'}, JVM: ${System.getProperty 'java.vm.version'} (${System.getProperty 'java.vendor'}), Arch: ${System.getProperty 'os.arch'}"
-minecraft {
+    loom {
+        silentMojangMappingsLicense()
+    }
 
-    mappings channel: mapping_channel, version: mapping_version
+    dependencies {
+        minecraft "com.mojang:minecraft:${minecraft_version}"
 
-    copyIdeResources = true
-    // generateRunFolders = true
-    // accessTransformer = file('src/main/resources/META-INF/accesstransformer.cfg')
+        modCompileOnlyApi "mezz.jei:jei-${minecraft_version}-common-api:${jei_version}"
 
-    runs {
-        configureEach {
-            workingDirectory project.file('run')
-            property 'mixin.env.remapRefMap', 'true'
-            property 'mixin.env.refMapRemappingFile', "${projectDir}/build/createSrgToMcp/output.srg"
-            property 'forge.logging.markers', 'REGISTRIES'
-            property 'forge.logging.console.level', 'debug'
-
-            mods {
-                "${mod_id}" {
-                    source sourceSets.main
-                }
-            }
-        }
-
-        client {
-            property 'forge.enabledGameTestNamespaces', mod_id
-        }
-
-        server {
-            property 'forge.enabledGameTestNamespaces', mod_id
-            args '--nogui'
-        }
-
-
-        gameTestServer {
-            property 'forge.enabledGameTestNamespaces', mod_id
-        }
-
-        data {
-            workingDirectory project.file('run-data')
-            args '--mod', mod_id, '--all', '--output', file('src/generated/resources/'), '--existing', file('src/main/resources/')
+        mappings loom.layered() {
+            officialMojangMappings()
+            parchment("org.parchmentmc.data:parchment-${mapping_version}@zip")
         }
     }
 }
 
-sourceSets.main.resources { srcDir 'src/generated/resources' }
+allprojects {
+    apply plugin: "java"
+    apply plugin: "architectury-plugin"
+    apply plugin: "maven-publish"
 
-repositories {
-    maven {
-        url "https://cursemaven.com"
-        content {
-            includeGroup "curse.maven"
-        }
-    }
-    maven {
-        // location of the maven that hosts JEI files before January 2023
-        name = "Progwml6's maven"
-        url = "https://dvs1.progwml6.com/files/maven/"
-    }
-    maven {
-        // location of the maven that hosts JEI files since January 2023
-        name = "Jared's maven"
-        url = "https://maven.blamejared.com/"
-    }
-    maven {
-        // location of a maven mirror for JEI files, as a fallback
-        name = "ModMaven"
-        url = "https://modmaven.dev"
-    }
-}
+    version = mod_version
+    group = maven_group
 
-dependencies {
-
-    minecraft "net.minecraftforge:forge:${minecraft_version}-${forge_version}"
-
-    implementation fg.deobf("curse.maven:cerbons-better-beacons-forge-921066:${better_beacons_version}")
-    implementation fg.deobf("curse.maven:double-slabs-350179:${double_slabs_version}")
-
-    compileOnly(fg.deobf("mezz.jei:jei-${minecraft_version}-common-api:${jei_version}"))
-    compileOnly(fg.deobf("mezz.jei:jei-${minecraft_version}-forge-api:${jei_version}"))
-
-    runtimeOnly(fg.deobf("mezz.jei:jei-${minecraft_version}-forge:${jei_version}"))
-}
-
-tasks.register('publishCurseForge', TaskPublishCurseForge) {
-    apiToken = System.getenv('CURSEFORGE_TOKEN')
-
-    def mainFile = upload(project_id, jar)
-    mainFile.changelog = rootProject.file(changelog).getText('UTF-8')
-    mainFile.changelogType = changelog_type
-    mainFile.releaseType = release_type
-    mainFile.addGameVersion("1.19", "1.19.1", "1.19.2", "1.19.3", "1.19.4", "1.20", "1.20.1", "1.20.2")
-    mainFile.addRequirement(jei_mod)
-}
-
-tasks.named('processResources', ProcessResources).configure {
-    var replaceProperties = [
-            minecraft_version: minecraft_version, minecraft_version_range: minecraft_version_range,
-            forge_version: forge_version, forge_version_range: forge_version_range,
-            loader_version_range: loader_version_range,
-            mod_id: mod_id, mod_name: mod_name, mod_license: mod_license, mod_version: mod_version,
-            mod_authors: mod_authors, mod_description: mod_description, jei_version_range: jei_version_range,
-    ]
-    inputs.properties replaceProperties
-
-    filesMatching(['META-INF/mods.toml', 'pack.mcmeta']) {
-        expand replaceProperties + [project: project]
-    }
-}
-
-tasks.named('jar', Jar).configure {
-    manifest {
-        attributes([
-                'Specification-Title'     : mod_id,
-                'Specification-Vendor'    : mod_authors,
-                'Specification-Version'   : '1', // We are version 1 of ourselves
-                'Implementation-Title'    : project.name,
-                'Implementation-Version'  : project.jar.archiveVersion,
-                'Implementation-Vendor'   : mod_authors,
-                'Implementation-Timestamp': new Date().format("yyyy-MM-dd'T'HH:mm:ssZ")
-        ])
-    }
-
-    finalizedBy 'reobfJar'
-}
-
-publishing {
-    publications {
-        register('mavenJava', MavenPublication) {
-            artifact jar
-        }
-    }
     repositories {
         maven {
-            url "file://${project.projectDir}/mcmodsrepo"
+            name "ParchmentMC"
+            url "https://maven.parchmentmc.org"
         }
+        maven {
+            name "CurseMaven"
+            url "https://cursemaven.com"
+            content {
+                includeGroup "curse.maven"
+            }
+        }
+        maven {
+            name "NeoForge"
+            url "https://maven.neoforged.net/releases/"
+        }
+        maven {
+            name "Jared's maven" // JEI
+            url "https://maven.blamejared.com/"
+        }
+        maven {
+            name "ModMaven" // JEI
+            url "https://modmaven.dev"
+        }
+        maven {
+            name "ModMenu"
+            url "https://maven.terraformersmc.com/"
+        }
+        maven {
+            name "Ladysnake Mods" // Cardinal Components
+            url "https://maven.ladysnake.org/releases"
+        }
+        flatDir {
+            dir "libs"
+        }
+    }
+
+    tasks.withType(JavaCompile) {
+        options.encoding "UTF-8"
+        options.release.set(17)
+    }
+
+    java {
+        withSourcesJar()
     }
 }
 
-tasks.withType(JavaCompile).configureEach {
-    options.encoding = 'UTF-8'
+tasks.register("publishAllCurseforgeAndModrinth", Task) {
+    dependsOn ":forge:publishCurseForgeAndModrinth"
+    dependsOn ":fabric:publishCurseForgeAndModrinth"
+    dependsOn ":neoforge:publishCurseForgeAndModrinth"
 }

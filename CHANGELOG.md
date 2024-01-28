@@ -16,6 +16,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Move project to multiloader
 - Requires CerbonsAPI 1.1.0 or above
 - Make compatible with Cerbons Better Beacons 2.0.0
+- Update to 1.20.4
 
 ## [1.1.2] - 2024-01-20
 

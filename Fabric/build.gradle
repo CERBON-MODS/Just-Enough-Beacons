@@ -26,10 +26,10 @@ dependencies {
     // Mod Dependencies
     modImplementation "com.cerbon:cerbons_api-fabric-${minecraft_version}:${cerbons_api_version}"
 
-    // Useful Mods
     modCompileOnlyApi "mezz.jei:jei-${minecraft_version}-fabric-api:${jei_version}"
     modRuntimeOnly "mezz.jei:jei-${minecraft_version}-fabric:${jei_version}"
 
+    // Useful Mods
     modImplementation "curse.maven:jade-324717:${jade_version_fabric}"
 
     modCompileOnly("com.terraformersmc:modmenu:${modmenu_version_fabric}") {
@@ -63,7 +63,8 @@ processResources {
             issues_url                       : issues_url,
             curseforge_url                   : curseforge_url,
             logo_file                        : logo_file,
-            cerbons_api_version_range_fabric : cerbons_api_version_range_fabric
+            cerbons_api_version_range_fabric : cerbons_api_version_range_fabric,
+            jei_version_range_fabric         : jei_version_range_fabric
     ]
     inputs.properties replaceProperties
 

@@ -25,10 +25,10 @@ dependencies {
     // Mod Dependencies
     modImplementation "com.cerbon:cerbons_api-neoforge-${minecraft_version}:${cerbons_api_version}"
 
-    // Useful Mods
     modCompileOnlyApi "mezz.jei:jei-${minecraft_version}-neoforge-api:${jei_version}"
     modRuntimeOnly "mezz.jei:jei-${minecraft_version}-neoforge:${jei_version}"
 
+    // Useful Mods
     //modImplementation "curse.maven:jade-324717:${jade_version_forge}"
 
     // All Projects Dependencies
@@ -53,7 +53,8 @@ processResources {
             issues_url                      : issues_url,
             curseforge_url                  : curseforge_url,
             logo_file                       : logo_file,
-            cerbons_api_version_range_forge : cerbons_api_version_range_forge
+            cerbons_api_version_range_forge : cerbons_api_version_range_forge,
+            jei_version_range_forge         : jei_version_range_forge
     ]
     inputs.properties replaceProperties
 

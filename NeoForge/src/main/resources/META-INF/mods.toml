@@ -2,6 +2,7 @@ modLoader="javafml"
 loaderVersion="${neo_loader_version_range}"
 license="${mod_license}"
 issueTrackerURL="${issues_url}"
+displayTest="IGNORE_ALL_VERSION"
 
 [[mods]]
    modId="${mod_id}"
@@ -24,18 +25,25 @@ issueTrackerURL="${issues_url}"
    type="required"
    versionRange="${neo_version_range}"
    ordering="NONE"
-   side="BOTH"
+   side="CLIENT"
 
 [[dependencies.${mod_id}]]
    modId="minecraft"
    type="required"
    versionRange="${minecraft_version_range}"
    ordering="NONE"
-   side="BOTH"
+   side="CLIENT"
 
 [[dependencies.${mod_id}]]
    modId="cerbons_api"
    type="required"
    versionRange="${cerbons_api_version_range_forge}"
    ordering="NONE"
-   side="BOTH"
+   side="CLIENT"
+
+[[dependencies.${mod_id}]]
+   modId="jei"
+   type="required"
+   versionRange="${jei_version_range_forge}"
+   ordering="NONE"
+   side="CLIENT"

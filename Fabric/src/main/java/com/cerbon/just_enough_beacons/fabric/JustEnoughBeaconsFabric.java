@@ -12,5 +12,7 @@ public class JustEnoughBeaconsFabric implements ModInitializer, ClientModInitial
     }
 
     @Override
-    public void onInitializeClient() {}
+    public void onInitializeClient() {
+        JustEnoughBeacons.init();
+    }
 }

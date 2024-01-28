@@ -1,6 +1,6 @@
 package com.cerbon.just_enough_beacons.fabric.mixin.test;
 
-import com.cerbon.just_enough_beacons.util.ModConstants;
+import com.cerbon.just_enough_beacons.util.JEBConstants;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.main.GameConfig;
 import org.spongepowered.asm.mixin.Mixin;
@@ -14,6 +14,6 @@ public abstract class TestMixin {
 
     @Inject(method = "<init>", at = @At("TAIL"))
     private void sendMessageIfWorking(GameConfig gameConfig, CallbackInfo ci) {
-        ModConstants.LOGGER.info("Fabric only mixins are working for {}!",  ModConstants.MOD_NAME);
+        JEBConstants.LOGGER.info("Fabric only mixins are working for {}!",  JEBConstants.MOD_NAME);
     }
 }

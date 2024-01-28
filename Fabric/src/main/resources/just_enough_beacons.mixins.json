@@ -4,6 +4,7 @@
   "package": "com.cerbon.just_enough_beacons.fabric.mixin",
   "compatibilityLevel": "JAVA_17",
   "mixins": [
+    "block_entity.ConduitBlockEntityMixin"
   ],
   "client": [
     "test.TestMixin"

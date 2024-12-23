@@ -25,8 +25,8 @@ dependencies {
     // Mod Dependencies
     modImplementation "com.cerbon:cerbons_api-neoforge-${minecraft_version}:${cerbons_api_version}"
 
-    modCompileOnlyApi "mezz.jei:jei-${minecraft_version}-neoforge-api:${jei_version}"
-    modRuntimeOnly "mezz.jei:jei-${minecraft_version}-neoforge:${jei_version}"
+    modCompileOnlyApi "mezz.jei:jei-${minecraft_version}.1-neoforge-api:${jei_version}"
+    modRuntimeOnly "mezz.jei:jei-${minecraft_version}.1-neoforge:${jei_version}"
 
     // Useful Mods
     //modImplementation "curse.maven:jade-324717:${jade_version_forge}"
@@ -58,7 +58,7 @@ processResources {
     ]
     inputs.properties replaceProperties
 
-    filesMatching(["META-INF/mods.toml", "pack.mcmeta"]) {
+    filesMatching(["META-INF/neoforge.mods.toml", "pack.mcmeta"]) {
         expand replaceProperties + [project: project]
     }
 }

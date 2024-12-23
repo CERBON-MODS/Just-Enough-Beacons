@@ -29,7 +29,7 @@ public class JEBJeiPlugin implements IModPlugin {
 
     @Override
     public @NotNull ResourceLocation getPluginUid() {
-        return new ResourceLocation(JEBConstants.MOD_ID, "jei_plugin");
+        return ResourceLocation.fromNamespaceAndPath(JEBConstants.MOD_ID, "jei_plugin");
     }
 
     @Override

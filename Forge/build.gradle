@@ -32,11 +32,11 @@ dependencies {
     // Mod Dependencies
     modImplementation "com.cerbon:cerbons_api-forge-${minecraft_version}:${cerbons_api_version}"
 
-    modCompileOnlyApi "mezz.jei:jei-${minecraft_version}-forge-api:${jei_version}"
-    modRuntimeOnly ("mezz.jei:jei-${minecraft_version}-forge:${jei_version}") { transitive false }
+    modCompileOnlyApi "mezz.jei:jei-${minecraft_version}.1-forge-api:${jei_version}"
+    modRuntimeOnly ("mezz.jei:jei-${minecraft_version}.1-forge:${jei_version}") { transitive false }
 
     // Useful Mods
-    modImplementation "curse.maven:jade-324717:${jade_version_forge}"
+    //modImplementation "curse.maven:jade-324717:${jade_version_forge}"
 
     // All Projects Dependencies
     compileOnly(annotationProcessor("io.github.llamalad7:mixinextras-common:${mixin_extras_version}"))

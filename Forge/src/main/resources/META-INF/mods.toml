@@ -34,10 +34,3 @@ displayTest="IGNORE_ALL_VERSION"
    versionRange="${cerbons_api_version_range_forge}"
    ordering="NONE"
    side="CLIENT"
-
-[[dependencies.${mod_id}]]
-   modId="jei"
-   mandatory=true
-   versionRange="${jei_version_range_forge}"
-   ordering="NONE"
-   side="CLIENT"
